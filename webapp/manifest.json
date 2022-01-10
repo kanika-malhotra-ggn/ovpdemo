@@ -1,0 +1,194 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "com.mck.ovp.ovpdemo",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "tags": {
+            "keywords": []
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/v2/cefdbservice/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "offline": false,
+        "sourceTemplate": {
+            "id": "OVP.smartovptemplate",
+            "version": "1.41.1"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": []
+        },
+        "dependencies": {
+            "minUI5Version": "1.96.0",
+            "libs": {
+                "sap.ovp": {}
+            },
+            "components": {}
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties",
+                "preload": false
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "mainService": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "extends": {
+            "extensions": {}
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainService",
+        "globalFilterEntityType": "IFLOW_TRX_GRP_ANALYTICS",
+        "containerLayout": "resizable",
+        "enableLiveFilter": true,
+        "considerAnalyticalParameters": true,
+        "cards": {
+            "StatusPerIflowId": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "Status Per Iflow",
+                    "entitySet": "IFLOW_TRX_GRP_ANALYTICS",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#StatusPerIflowId",
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#StatusPerIflowId",
+                    "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#StatusPerIflowId",
+                    "defaultSpan": {
+                        "rows": 10,
+                        "cols": 2,
+                        "showOnlyHeader": false
+                    }
+                }
+            },
+            "ErrorAgeing": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.charts.analytical",
+                "navigation": "dataPointNav",
+                "settings": {
+                    "title": "Error Ageing",
+                    "entitySet": "IFLOW_TRX_GRP_ANALYTICS",
+                    "defaultSpan": {
+                        "rows": 7,
+                        "cols": 2,
+                        "showOnlyHeader": false
+                    },
+                    "tabs": [
+                        {
+                            "entitySet": "IFLOW_TRX_GRP_ANALYTICS",
+                            "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#Buckets",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#line",
+                            "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#Buckets",
+                            "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#Buckets",
+                            "value": "Error Ageing"
+                            
+                        },
+                        {
+                            "entitySet": "IFLOW_TRX_GRP_ANALYTICS",
+                            "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#StartDt",
+                            "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#StartDt",
+                            "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification",
+                            "value": "TotErr w.r.t Start Time",
+                            "bEnableStableColors": true
+                        }
+                        
+                    ]
+                }
+            },
+            "Status": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "Status",
+                    "entitySet": "IFLOW_TRX_GRP_ANALYTICS",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#Criticality",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#STATUS",
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#STATUS",
+                    "defaultSpan": {
+                        "rows": 5,
+                        "cols": 2,
+                        "showOnlyHeader": false
+                    }
+                }
+            }
+        },
+        "filterSettings": {
+            "dateSettings": {
+                "useDateRange": true
+            }
+        },
+        "chartSettings": {
+            "showDataLabel": true
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "com-mck-ovp-ovpdemo"
+    },
+    "sap.ui.generic.app": {
+        "settings": {}
+    }
+}

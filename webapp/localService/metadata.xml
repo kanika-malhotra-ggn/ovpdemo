@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Analytics.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cefdbservice" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="CEF_iFlOW_MASTER_TBL" EntityType="cefdbservice.CEF_iFlOW_MASTER_TBL"/>
+                <EntitySet Name="CEF_iFLOW_NOTIFICATION" EntityType="cefdbservice.CEF_iFLOW_NOTIFICATION"/>
+                <EntitySet Name="CEF_iFLOW_BUSINESS_KEY_MASTER" EntityType="cefdbservice.CEF_iFLOW_BUSINESS_KEY_MASTER"/>
+                <EntitySet Name="CEF_iFLOW_TRX_TBL" EntityType="cefdbservice.CEF_iFLOW_TRX_TBL"/>
+                <EntitySet Name="IFLOW_TRX_GRP" EntityType="cefdbservice.IFLOW_TRX_GRP"/>
+                <EntitySet Name="IFLOW_TRX_GRP_ANALYTICS" EntityType="cefdbservice.IFLOW_TRX_GRP_ANALYTICS" sap:semantics="aggregate"/>
+                <EntitySet Name="StatusVH" EntityType="cefdbservice.StatusVH" sap:semantics="aggregate"/>
+            </EntityContainer>
+            <EntityType Name="CEF_iFlOW_MASTER_TBL">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="IFLOW_ID" Type="Edm.String" MaxLength="250"/>
+                <Property Name="IFLOW_TYPE" Type="Edm.String" MaxLength="250"/>
+                <Property Name="IFLOW_DESCRIPTION" Type="Edm.String" MaxLength="500"/>
+                <Property Name="SORUCE_SYSTEM" Type="Edm.String" MaxLength="250"/>
+                <Property Name="TARGET_SYSTEM" Type="Edm.String" MaxLength="250"/>
+                <Property Name="PRESERVE_ERROR_PAYLOAD" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PRESERVE_ALL_PAYLOAD" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PROCESSING_TYPE" Type="Edm.String" MaxLength="250"/>
+            </EntityType>
+            <EntityType Name="CEF_iFLOW_NOTIFICATION">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="IFLOW_ID" Type="Edm.String" MaxLength="250"/>
+                <Property Name="ALERT_TYPE" Type="Edm.String" MaxLength="250"/>
+                <Property Name="ALERT_CONFIG" Type="Edm.String" MaxLength="500"/>
+                <Property Name="ENVIRONMENT" Type="Edm.String" MaxLength="250"/>
+            </EntityType>
+            <EntityType Name="CEF_iFLOW_BUSINESS_KEY_MASTER">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="IFLOW_ID" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY1" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY1_MEANING" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_KEY2" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY2_MEANING" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_KEY3" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY3_MEANING" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_KEY4" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY4_MEANING" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_KEY5" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY5_MEANING" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_KEY6" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY6_MEANING" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_KEY7" Type="Edm.String" MaxLength="250"/>
+                <Property Name="BUSINESS_KEY7_MEANING" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="ACTIVE" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="CEF_iFLOW_TRX_TBL">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="IFLOW_ID" Type="Edm.String" MaxLength="250"/>
+                <Property Name="IFLOW_MESSAGE_ID" Type="Edm.String" MaxLength="250"/>
+                <Property Name="IFLOW_START_TIME" Type="Edm.DateTimeOffset"/>
+                <Property Name="IFLOW_END_TIME" Type="Edm.DateTimeOffset"/>
+                <Property Name="TRANSACTION_SEQ" Type="Edm.Int32"/>
+                <Property Name="EVENT" Type="Edm.String" MaxLength="250"/>
+                <Property Name="SOURCE_IDENTIFIER" Type="Edm.String" MaxLength="250"/>
+                <Property Name="REQUEST_PAYLOAD" Type="Edm.Binary"/>
+                <Property Name="RESPONSE_PAYLOAD" Type="Edm.Binary"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ERROR_MSG" Type="Edm.String"/>
+                <Property Name="ERROR_CODE" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="ERROR_LEVEL" Type="Edm.String" MaxLength="250"/>
+                <Property Name="ERROR_OCCURRED_TIME" Type="Edm.DateTimeOffset"/>
+                <Property Name="BUSINESS_VALUE1" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_VALUE2" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_VALUE3" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_VALUE4" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_VALUE5" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_VALUE6" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="BUSINESS_VALUE7" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="SOD" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="PARENT_MESSAGE_ID" Type="Edm.String" MaxLength="250"/>
+                <Property Name="REPROCESSABLE_FLAG" Type="Edm.String" MaxLength="10"/>
+                <Property Name="REPROCESS_COUNT" Type="Edm.Int32"/>
+                <Property Name="REPROCESS_COMMENT" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="numberOfMessages" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="IFLOW_TRX_GRP">
+                <Key>
+                    <PropertyRef Name="IFLOW_ID"/>
+                    <PropertyRef Name="IFLOW_MESSAGE_ID"/>
+                </Key>
+                <Property Name="IFLOW_ID" Type="Edm.String" MaxLength="250" Nullable="false"/>
+                <Property Name="IFLOW_MESSAGE_ID" Type="Edm.String" MaxLength="250" Nullable="false"/>
+                <Property Name="IFLOW_START_TIME" Type="Edm.DateTimeOffset"/>
+                <Property Name="IFLOW_END_TIME" Type="Edm.DateTimeOffset"/>
+                <Property Name="SOURCE_IDENTIFIER" Type="Edm.String" MaxLength="250"/>
+                <Property Name="StartDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="EndDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="ErrorCount" Type="Edm.Int32"/>
+                <Property Name="SuccessCount" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="IFLOW_TRX_GRP_ANALYTICS" sap:semantics="aggregate">
+                <Key>
+                    <PropertyRef Name="ID__"/>
+                </Key>
+                <Property Name="ID__" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IFLOW_ID" Type="Edm.String" MaxLength="250" sap:aggregation-role="dimension" sap:label="IFlow Id"/>
+                <Property Name="IFLOW_MESSAGE_ID" Type="Edm.String" MaxLength="250" sap:aggregation-role="dimension" sap:label="Message Id"/>
+                <Property Name="IFLOW_START_TIME" Type="Edm.DateTimeOffset" sap:aggregation-role="dimension" sap:label="Start Time"/>
+                <Property Name="IFLOW_END_TIME" Type="Edm.DateTimeOffset" sap:aggregation-role="dimension" sap:label="End Time"/>
+                <Property Name="SOURCE_IDENTIFIER" Type="Edm.String" MaxLength="250" sap:aggregation-role="dimension" sap:label="Source"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="100" sap:aggregation-role="dimension" sap:label="Status"/>
+                <Property Name="numberOfMessages" Type="Edm.Int32" sap:aggregation-role="measure" sap:label="Number of Messages"/>
+                <Property Name="StartDt" Type="Edm.DateTime" sap:filter-restriction="interval" sap:aggregation-role="dimension" sap:label="Start Date" sap:display-format="Date"/>
+                <Property Name="EndDt" Type="Edm.DateTime" sap:filter-restriction="interval" sap:aggregation-role="dimension" sap:label="End Date" sap:display-format="Date"/>
+                <Property Name="Criticality" Type="Edm.Int32" sap:aggregation-role="dimension"/>
+            </EntityType>
+            <EntityType Name="StatusVH" sap:semantics="aggregate">
+                <Key>
+                    <PropertyRef Name="ID__"/>
+                </Key>
+                <Property Name="ID__" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="100" sap:aggregation-role="dimension"/>
+            </EntityType>
+            <Annotations Target="cefdbservice.CEF_iFlOW_MASTER_TBL/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFlOW_MASTER_TBL/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFlOW_MASTER_TBL/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFlOW_MASTER_TBL/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_NOTIFICATION/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_NOTIFICATION/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_NOTIFICATION/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_NOTIFICATION/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_BUSINESS_KEY_MASTER/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_BUSINESS_KEY_MASTER/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_BUSINESS_KEY_MASTER/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_BUSINESS_KEY_MASTER/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_TRX_TBL/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_TRX_TBL/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_TRX_TBL/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.CEF_iFLOW_TRX_TBL/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>IFLOW_ID</PropertyPath>
+                        <PropertyPath>IFLOW_MESSAGE_ID</PropertyPath>
+                        <PropertyPath>StartDate</PropertyPath>
+                        <PropertyPath>EndDate</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_ID"/>
+                            <PropertyValue Property="Label" String="IFlow Id"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_MESSAGE_ID"/>
+                            <PropertyValue Property="Label" String="Message Id"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_START_TIME"/>
+                            <PropertyValue Property="Label" String="Start Time"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_END_TIME"/>
+                            <PropertyValue Property="Label" String="End Time"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SOURCE_IDENTIFIER"/>
+                            <PropertyValue Property="Label" String="Source Identifier"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ErrorCount"/>
+                            <PropertyValue Property="Label" String="Error Count"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SuccessCount"/>
+                            <PropertyValue Property="Label" String="Success Count"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP/IFLOW_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="IFlow Id"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP/IFLOW_MESSAGE_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Message Id"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP/StartDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Start Date"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP/EndDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="End Date"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP/ErrorCount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP/SuccessCount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>STATUS</PropertyPath>
+                        <PropertyPath>StartDt</PropertyPath>
+                        <PropertyPath>EndDt</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="STATUS">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#STATUS</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="Criticality">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#Criticality</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="StartDt">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#StartDt</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="EndDt">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#EndDt</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>STATUS</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>numberOfMessages</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="numberOfMessages"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="STATUS">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>STATUS</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>numberOfMessages</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="numberOfMessages"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="Criticality">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>STATUS</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>Criticality</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="Criticality"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="StartDt">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>STATUS</PropertyPath>
+                                <PropertyPath>StartDt</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="StartDt"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>numberOfMessages</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="numberOfMessages"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="EndDt">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>EndDt</PropertyPath>
+                                <PropertyPath>STATUS</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="EndDt"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>numberOfMessages</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="numberOfMessages"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="Criticality">
+                    <Record Type="UI.SelectionVariantType">
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="Criticality"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="1"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="Criticality">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Title" String="Status"/>
+                        <PropertyValue Property="Value" Path="Criticality"/>
+                        <PropertyValue Property="CriticalityCalculation">
+                            <Record Type="UI.CriticalityCalculationType">
+                                <PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>
+                                <PropertyValue Property="DeviationRangeHighValue" String="1"/>
+                                <PropertyValue Property="ToleranceRangeHighValue" String="3"/>
+                                <PropertyValue Property="DeviationRangeLowValue" String="0"/>
+                                <PropertyValue Property="ToleranceRangeLowValue" String="2"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.KPI" Qualifier="Criticality">
+                    <Record Type="UI.KPIType">
+                        <PropertyValue Property="DataPoint" Path="@UI.DataPoint#Criticality"/>
+                        <PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#Criticality"/>
+                        <PropertyValue Property="ID" String="Messages by Status"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_MESSAGE_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_START_TIME"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IFLOW_END_TIME"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SOURCE_IDENTIFIER"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="STATUS"/>
+                            <PropertyValue Property="Criticality" Path="Criticality"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="numberOfMessages"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="StartDt"/>
+                            <Annotation Term="UI.Hidden" Bool="true"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="EndDt"/>
+                            <Annotation Term="UI.Hidden" Bool="true"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cefdbservice.EntityContainer/IFLOW_TRX_GRP_ANALYTICS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.PresentationVariant" Qualifier="STATUS">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#STATUS</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="Criticality">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#Criticality</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="StartDt">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#StartDt</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="EndDt">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#EndDt</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="Criticality">
+                    <Record Type="UI.SelectionVariantType">
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="Criticality"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="1"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.KPI" Qualifier="Criticality">
+                    <Record Type="UI.KPIType">
+                        <PropertyValue Property="DataPoint" Path="@UI.DataPoint#Criticality"/>
+                        <PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#Criticality"/>
+                        <PropertyValue Property="ID" String="Messages by Status"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/ID__" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/IFLOW_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="IFlow Id"/>
+                <Annotation Term="Common.Application" String="true"/>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/IFLOW_MESSAGE_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Message Id"/>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/IFLOW_START_TIME" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Start Time"/>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/IFLOW_END_TIME" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="End Time"/>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/SOURCE_IDENTIFIER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Source"/>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/STATUS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Status"/>
+                <Annotation Term="Common.ValueList" Qualifier="StatusVisualFilter">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="IFLOW_TRX_GRP_ANALYTICS"/>
+                        <PropertyValue Property="PresentationVariantQualifier" String="STATUS"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="ValueListProperty" String="STATUS"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Status"/>
+                        <PropertyValue Property="CollectionPath" String="StatusVH"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID__"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="STATUS"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/numberOfMessages" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Number of Messages"/>
+                <Annotation Term="Analytics.Measure" Bool="true"/>
+                <Annotation Term="Aggregation.default" EnumMember="Aggregation.defaultType/SUM"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/StartDt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Start Date"/>
+                <Annotation Term="Common.ValueList" Qualifier="StartDtVisualFilter">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="IFLOW_TRX_GRP_ANALYTICS"/>
+                        <PropertyValue Property="PresentationVariantQualifier" String="StartDt"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="StartDt"/>
+                                    <PropertyValue Property="ValueListProperty" String="StartDt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/EndDt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="End Date"/>
+                <Annotation Term="Common.ValueList" Qualifier="EndDtVisualFilter">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="IFLOW_TRX_GRP_ANALYTICS"/>
+                        <PropertyValue Property="PresentationVariantQualifier" String="EndDt"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="EndDt"/>
+                                    <PropertyValue Property="ValueListProperty" String="EndDt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.IFLOW_TRX_GRP_ANALYTICS/Criticality" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.EntityContainer/StatusVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cefdbservice.StatusVH/ID__" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cefdbservice.StatusVH/STATUS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
